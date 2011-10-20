@@ -7,6 +7,7 @@
 //
 
 #import "NerdfeedAppDelegate.h"
+#import "ListViewController.h"
 
 @implementation NerdfeedAppDelegate
 
@@ -16,6 +17,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    ListViewController *lvc = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
+    [lvc autorelease];
+    
+    UINavigationController *masterNav = [[UINavigationController alloc] initWithRootViewController:lvc];
+    
+    [masterNav autorelease];
+    
+    [[self window] setRootViewController:masterNav];
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
