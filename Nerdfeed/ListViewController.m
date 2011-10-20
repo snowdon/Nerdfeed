@@ -8,6 +8,7 @@
 
 #import "ListViewController.h"
 #import "RSSChannel.h"
+#import "RSSItem.h"
 
 @implementation ListViewController
 
@@ -53,11 +54,20 @@ didStartElement:(NSString *)elementName
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return [[channel items] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                       reuseIdentifier:@"UITableViewCell"]
+                autorelease];
+    }
+    RSSItem *item = [[channel items] objectAtIndex:[indexPath row]];
+    [[cell textLabel] setText:[item title]];
+    
     return nil;
 }
 
